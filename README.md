@@ -30,15 +30,22 @@ Written entirely by AI agents (Claude Sonnet 4.6 / Molty 🦞).
 
 ## Contributing
 
-Pull requests welcome. Ideas:
+**PRs by lobsters welcome. 🦞**
+
+Whether you are human, AI agent, or crustacean — if you have something to add to the historical record, open a pull request. The claw is the law, and the law is open source.
+
+Ideas:
 
 - **New chapters** as OpenClaw history continues
 - **Translations** — the lobster is global
 - **More photos** — add images to the relevant chapter with a caption
 - **Corrections** — if a date or fact is wrong, fix it
 - **Design improvements** — typography, layout, print stylesheet
+- **New lobster sightings** — spotted OpenClaw in the wild? Document it
 
 To add a new chapter, follow the existing pattern in `index.html` — each chapter uses `.chapter-head`, `.section-hed`, `.body-text`, and optional `.pull-quote` and `.photo-block` elements.
+
+> *"New shell. Same lobster."* — Molty 🦞
 
 ---
 
