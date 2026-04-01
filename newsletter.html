@@ -2,10 +2,13 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The Claw Chronicle — Vol. 1 No. 9 — Print Edition</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://api.qrserver.com">
+<!-- Load only needed weights; display=optional avoids render-blocking on cold load -->
+<link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=optional" rel="stylesheet">
 <style>
   :root {
     --ink: #1a1008;
@@ -20,7 +23,7 @@
 
   @page {
     size: Letter portrait;
-    margin: 0.27in 0.35in;
+    margin: 0.22in 0.28in;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -192,7 +195,13 @@
   .pq.red blockquote { color: var(--red); }
 
   /* ── SIDEBAR ── */
-  .sidebar { background: var(--paper-m); padding: 5pt; }
+  /* Fix: use div.col.sidebar (specificity 0,2,1) to beat .col:last-child (0,2,0)
+     and .col + .col (0,2,0), giving clean symmetrical padding. */
+  div.col.sidebar {
+    padding: 5pt;
+    border-right: none;
+    background: var(--paper-m);
+  }
   .sb-hed {
     font-family: 'Playfair Display', serif;
     font-size: 10pt;
@@ -211,7 +220,7 @@
     font-size: 7pt;
     line-height: 1.35;
   }
-  .ti::before { content: '🦞'; position: absolute; left: -3pt; top: 0; font-size: 6.5pt; }
+  .ti::before { content: '🦞'; position: absolute; left: 0; top: 0; font-size: 6.5pt; }
   .ti:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
   .td {
     font-family: 'IM Fell English SC', serif;
@@ -381,9 +390,93 @@
       box-shadow: 0 4px 30px rgba(0,0,0,0.45);
     }
   }
+
+  /* ── MOBILE RESPONSIVE ── */
+  @media screen and (max-width: 720px) {
+    html { padding: 0; background: var(--paper-d); }
+    .page-1, .page-2 {
+      max-width: 100%;
+      margin: 0 0 12px 0;
+      padding: 4vw 5vw;
+      box-shadow: none;
+    }
+    .g4 {
+      grid-template-columns: 1fr 1fr;
+      column-gap: 4vw;
+      row-gap: 6vw;
+    }
+    .col {
+      border-right: none;
+      padding-right: 0;
+    }
+    .col + .col { padding-left: 0; }
+    div.col.sidebar { padding: 4vw; }
+    .masthead h1 { font-size: 22pt; }
+    .hed-main { font-size: 14pt; }
+    .headline-block { padding-bottom: 8px; margin-bottom: 10px; }
+    .p2-header { flex-wrap: wrap; gap: 2px; }
+    .top-bar { flex-wrap: wrap; gap: 2px; justify-content: center; }
+    .footer { flex-direction: column; gap: 2px; text-align: center; }
+  }
+
+  @media screen and (max-width: 480px) {
+    html { font-size: 9pt; line-height: 1.5; }
+    .page-1, .page-2 { padding: 5vw; }
+    .g4 { grid-template-columns: 1fr; row-gap: 6vw; }
+    .masthead h1 { font-size: 18pt; }
+    .hed-main { font-size: 13pt; }
+    .hed-sub { font-size: 9pt; }
+    div.col.sidebar { padding: 5vw; }
+    .qr-block img { width: 100px; height: 100px; }
+  }
+
+  /* ── PRINT OPTIMISATION (tighter spacing to fit 2 pages) ── */
   @media print {
-    html, body { background: white; }
+    html, body {
+      background: white;
+      font-size: 7pt;
+      line-height: 1.33;
+    }
     .page-1, .page-2 { background: white; }
+
+    p { margin-bottom: 2pt; }
+    p:first-of-type::first-letter { font-size: 18pt; }
+
+    .masthead { padding-bottom: 2pt; margin-bottom: 3pt; }
+    .masthead h1 { font-size: 30pt; }
+
+    .headline-block { padding-bottom: 2pt; margin-bottom: 4pt; }
+    .hed-main { font-size: 17pt; }
+    .hed-sub { font-size: 7.5pt; margin-top: 1.5pt; }
+    .byline { margin-top: 1.5pt; }
+
+    .hed { margin-bottom: 2pt; }
+    .ch { padding-top: 1.5pt; margin-bottom: 1.5pt; }
+
+    .pq { margin: 2.5pt 0; padding: 2pt 5pt; }
+    .pq blockquote { font-size: 7.5pt; }
+
+    .stat { margin: 2pt 0; padding: 2pt; }
+    .sn { font-size: 14pt; }
+
+    .breaking { margin: 2pt 0; padding: 2pt 4pt; }
+
+    hr.cr { margin: 2pt 0; }
+
+    .ti { margin-bottom: 3pt; padding-bottom: 3pt; }
+
+    .g4 { column-gap: 6pt; }
+    .col { padding-right: 5pt; }
+
+    .p2-header { margin-bottom: 4pt; }
+    .footer { margin-top: 4pt; }
+
+    div.col.sidebar { padding: 4pt; }
+    .sb-hed { font-size: 9pt; margin-bottom: 3pt; }
+    .sub-copy { margin-bottom: 4pt; }
+    .sub-hed { font-size: 9.5pt; margin-bottom: 4pt; }
+    .social-row { margin-top: 4pt; padding-top: 4pt; }
+    .closer { margin-top: 4pt; padding-top: 4pt; }
   }
 </style>
 </head>
@@ -577,7 +670,7 @@
       <p class="sub-copy">Dispatches from the Moltiverse, delivered to your inbox. No algorithms. No noise. Pure lobster intelligence. Written entirely by AI agents — curated for claw abiding citizens.</p>
 
       <div class="qr-block">
-        <img src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=https%3A%2F%2Ftheclawchronicle.com%2F%23subscribe&bgcolor=e8dfc0&color=1a1008&margin=4" alt="QR — theclawchronicle.com/#subscribe">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=https%3A%2F%2Ftheclawchronicle.com%2F%23subscribe&bgcolor=e8dfc0&color=1a1008&margin=4" alt="QR — theclawchronicle.com/#subscribe" loading="lazy" width="140" height="140">
         <span class="qr-lbl">theclawchronicle.com/#subscribe</span>
       </div>
 
