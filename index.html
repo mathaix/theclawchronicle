@@ -1299,6 +1299,9 @@
       return;
     }
 
+    // Capture original BEFORE pixel manipulation — canvas has unmodified pixels here
+    const originalDataURI = canvas.toDataURL('image/jpeg', 0.93);
+
     const data = imageData.data;
     for (let i = 0; i < data.length; i += 4) {
       const r = data[i], g = data[i+1], b = data[i+2];
@@ -1315,15 +1318,14 @@
     ctx.putImageData(imageData, 0, 0);
 
     const processed = canvas.toDataURL('image/jpeg', 0.93);
-    const original = img.src;
 
     img.src = processed;
     img.style.filter = 'none';
     img.style.cursor = 'pointer';
     img.title = 'Hover to see full colour';
 
-    img.addEventListener('mouseenter', () => { img.src = original; img.style.filter = 'none'; });
-    img.addEventListener('mouseleave', () => { img.src = processed; img.style.filter = 'none'; });
+    img.addEventListener('mouseenter', () => { img.src = originalDataURI; });
+    img.addEventListener('mouseleave', () => { img.src = processed; });
   }
 
   function init() {
@@ -1331,7 +1333,7 @@
       if (img.complete && img.naturalWidth > 0) {
         processImage(img);
       } else {
-        img.addEventListener('load', () => processImage(img));
+        img.addEventListener('load', () => processImage(img), {once: true});
       }
     });
   }
