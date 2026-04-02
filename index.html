@@ -442,6 +442,63 @@
   }
 
   /* ── FOOTER ── */
+  /* ── SPONSORED AD BANNER ── */
+  .ad-banner {
+    border-top: 2px solid var(--rule);
+    border-bottom: 2px solid var(--rule);
+    background: var(--paper-dark);
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .ad-banner-label {
+    font-family: 'IM Fell English SC', serif;
+    font-size: 8px;
+    letter-spacing: 0.2em;
+    color: var(--sepia);
+    border-bottom: 1px solid var(--sepia-light);
+    padding-bottom: 4px;
+    margin-bottom: 6px;
+    display: block;
+  }
+  .ad-banner-qr {
+    flex: 0 0 auto;
+    border: 2px double var(--rule);
+    padding: 4px;
+    background: var(--paper);
+  }
+  .ad-banner-qr img { display: block; width: 72px; height: 72px; }
+  .ad-banner-body { flex: 1; }
+  .ad-banner-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.1;
+    display: block;
+    margin-bottom: 4px;
+  }
+  .ad-banner-copy {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--ink-light);
+    display: block;
+    margin-bottom: 6px;
+  }
+  .ad-banner-url {
+    font-family: 'IM Fell English SC', serif;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--red);
+    text-decoration: none;
+    border-top: 1px solid var(--sepia-light);
+    padding-top: 4px;
+    display: inline-block;
+  }
+  .ad-banner-url:hover { text-decoration: underline; }
+
   .footer {
     border-top: 6px double var(--rule);
     padding: 8px 24px;
@@ -709,8 +766,8 @@
   /* ── PRINT STYLESHEET: 2-PAGE LETTER ── */
   @media print {
     @page {
-      size: Letter portrait;
-      margin: 0.4in 0.45in;
+      size: 11in 17in portrait;
+      margin: 0.4in 0.5in;
     }
 
     .print-page-2 {
@@ -769,7 +826,7 @@
 
     /* ─ Hero: keep but shorter ─ */
     .hero-photo          { display: block !important; }
-    .hero-photo img      { max-height: 160px !important; }
+    .hero-photo img      { max-height: 340px !important; object-fit: cover !important; object-position: center 60% !important; }
 
     /* ─ Hide non-hero photos (saves ink, fits 2 pages) ─ */
     .photo-block:not(.hero-photo) { display: none !important; }
@@ -1045,6 +1102,19 @@
       </div>
     </aside>
 
+    <!-- SPONSORED AD — end of first page -->
+    <div class="ad-banner" style="grid-column: 1 / -1; margin: 10px 0 0;">
+      <div class="ad-banner-qr">
+        <img src="qr-openclawmachines.png" alt="Scan to sign up for OpenClaw Training">
+      </div>
+      <div class="ad-banner-body">
+        <span class="ad-banner-label">✦ Advertisement ✦</span>
+        <span class="ad-banner-name">OpenClaw Training</span>
+        <span class="ad-banner-copy">Weekly OpenClaw classes. Learn to build agentic systems from scratch — every week. Taught by practitioners, for practitioners.</span>
+        <a class="ad-banner-url" href="https://forms.gle/jKb6ajpoFo6NZyTEA" target="_blank" rel="noopener">Sign up · openclawmachines.com ↗</a>
+      </div>
+    </div>
+
     <!-- FULL-WIDTH DIVIDER / PRINT PAGE 2 BREAK -->
     <hr class="section-divider print-page-2">
     <div class="band">✦ &nbsp; World Coverage &nbsp;·&nbsp; The GitHub Phenomenon &nbsp;·&nbsp; Jensen Speaks &nbsp; ✦</div>
@@ -1052,29 +1122,33 @@
     <!-- CHAPTER 7: MEETUPS (cols 1–2) -->
     <div class="col col-span-2" style="border-top: none;">
       <span class="chapter-head">Chapter VII &nbsp;·&nbsp; February–March 2026</span>
-      <h3 class="section-hed">Meetups Around the World: From San Francisco to Tokyo</h3>
+      <h3 class="section-hed">First SF Meetup: A Madhouse. Peter Mobbed for Selfies.</h3>
 
-      <div class="photo-block" style="margin-bottom: 6px;">
-        <img loading="lazy" src="clawmania_opt.jpg" alt="Clawmania — lobsters in suits descending from a plane">
-        <div class="photo-caption" style="padding: 6px 10px;">
-          <span style="font-family:'Playfair Display',serif; font-style:italic; font-size:13px; font-weight:700; color:var(--ink); display:block; letter-spacing:0.04em;">Clawmania</span>
-          <strong>San Francisco, Feb. 5, 2026</strong> — The crustacean delegation arrives. Security overwhelmed. Peter Steinberger mobbed for selfies. Overflow crowds redirected to livestream on a separate floor.
+      <div class="body-text">
+        <p>On February 5, the first major OpenClaw meetup in San Francisco descended into chaos nobody had planned for. Security turned people away at the door. Overflow crowds watched on a livestream from a separate floor. And Peter Steinberger — a Vienna hacker who two months earlier had been debugging a WhatsApp gateway — was mobbed for selfies <em>"like a rockstar."</em></p>
+      </div>
+
+      <!-- Featured photo — full width, prominent -->
+      <div class="photo-block" style="margin: 10px 0; border: 2px solid var(--rule);">
+        <img loading="lazy" src="clawmania_opt.jpg" alt="Clawmania — lobsters in suits descending from a plane, Beatles-style" style="width:100%; max-height:320px; object-fit:cover; object-position:center 30%; display:block;">
+        <div class="photo-caption" style="padding: 8px 12px; background:var(--paper-dark);">
+          <span style="font-family:'Playfair Display',serif; font-style:italic; font-size:14px; font-weight:700; color:var(--ink); display:block; letter-spacing:0.04em; margin-bottom:3px;">Clawmania &nbsp;·&nbsp; 2026</span>
+          OpenClaw committers are becoming rockstars. The crustacean delegation arrives — everywhere at once.
         </div>
       </div>
 
       <div class="body-text">
-        <p>On February 5, the first major OpenClaw meetup in San Francisco descended into what one attendee called "a madhouse" — security turned people away at the door, overflow crowds watched on a livestream from a separate floor, and Peter Steinberger was mobbed for selfies <em>"like a rockstar."</em></p>
-        <p>It was only the beginning. By March, Claw meetups had spread to Kuala Lumpur (co-hosted with AWS Startups and YTL AI Labs), a hands-on workshop at SF's Frontier Tower, and — on March 29 — Tokyo, where Peter live-posted: <em>"them: openclaw is dead / me: *keeps scrolling* — let's meet in Tokyo tonight!"</em></p>
-        <p>The luma.com/claw events page became a global social calendar for the AI builder class.</p>
+        <p>The luma.com/claw events page became a global social calendar almost overnight. Meetups spread to Kuala Lumpur (co-hosted with AWS Startups and YTL AI Labs) and a hands-on workshop at SF's Frontier Tower. On March 29, Peter live-posted from Tokyo: <em>"them: openclaw is dead / me: *keeps scrolling* — let's meet in Tokyo tonight!"</em> It sold out in minutes.</p>
+        <p>Every continent. Every timezone. The lobster was everywhere.</p>
       </div>
 
       <div class="photo-row">
         <div class="photo-block">
-          <img loading="lazy" src="https://pbs.twimg.com/media/HEjfyg7bcAAHQa4?format=jpg&name=medium" alt="OpenClaw Meetup at Network School sign, March 29 2026">
+          <img loading="lazy" src="photo_tokyo_meetup.jpg" alt="OpenClaw Meetup at Network School sign, March 29 2026">
           <div class="photo-caption"><strong>Tokyo, Mar. 29, 2026</strong> — OpenClaw Meetup @ Network School. Sold out.</div>
         </div>
         <div class="photo-block">
-          <img loading="lazy" src="https://pbs.twimg.com/media/HEmKlu4WUAAS7ma?format=jpg&name=900x900" alt="Illustration: presenter to a room full of lobsters">
+          <img loading="lazy" src="photo_presenter_lobsters.jpg" alt="Illustration: presenter to a room full of lobsters">
           <div class="photo-caption"><strong>Illustration, 2026</strong> — "250K GitHub stars. Mac Minis sold out everywhere." The community in full swing.</div>
         </div>
       </div>
